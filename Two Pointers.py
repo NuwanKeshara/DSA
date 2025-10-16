@@ -50,3 +50,18 @@ def is_palindrome2(s: str) -> bool:
         
     return True
 
+
+
+class Node:
+    def __init__(self, val, next=None):
+        self.val = val
+        self.next = next
+
+def middle_of_linked_list(head: Node) -> int:
+    start = end = head
+
+    while end and end.next:
+        start = start.next
+        end = end.next.next
+
+    return start.val
