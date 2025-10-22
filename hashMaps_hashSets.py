@@ -1,5 +1,5 @@
 
-from collections import Counter
+from collections import Counter, defaultdict
 
 
 class Solution:
@@ -73,6 +73,53 @@ class Solution:
 
     def valid_anagram4(self, s:str, t:str) -> bool:
         return sorted(s) == sorted(t)
+    
+
+
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        dic = {}
+
+        for i in range (len(nums)):
+            val = target - nums[i]
+
+            if val in dic:
+                return [dic[val], i]
+            else:
+                dic[nums[i]] = i
+        return []
+    
+
+    def groupAnagrams(self, str_list: list[str]) -> list[list[str]]:
+        str_dict = {}
+
+        for i in range(len(str_list)):
+            if str(sorted(str_list[i])) in str_dict:
+                str_dict[str(sorted(str_list[i]))].append(str_list[i])
+            else:
+                str_dict[str(sorted(str_list[i]))] = [str_list[i]]
+        print(str_dict)
+
+                         
+        return list(str_dict.values())
+    
+
+    def groupAnagrams1(self, str_list: list[str]) -> list[list[str]]:
+        dict = defaultdict(list)
+
+        for i in str_list:
+            count = [0] * 26
+
+            for j in i:
+                count[ord(j) - ord('a')] += 1
+            dict[tuple(count)].append(i)
+        
+        return list(dict.values())
+
 
 
         
+
+if __name__ == "__main__":
+    cls = Solution()
+
+    print(cls.groupAnagrams1(["act","pots","tops","cat","stop","hat"]))
