@@ -117,7 +117,27 @@ class Solution:
 
 
 
+    def topKElements(self, nums: list[int], k: int) -> list[int]:
+        heap = {}
+        freq = [[] for i in range(len(nums) + 1)]
+
+        for val in nums:
+            heap[val] = heap.get(val, 0) + 1
+
+        for val, count in heap.items():
+            freq[count].append(val)
+
+        res = []
+
+        for i in range(len(freq)-1, 0, -1):
+            for j in freq[i]:
+                res.append(j)
+                if len(res) == k:
+                    return res
         
+
+
+
 
 if __name__ == "__main__":
     cls = Solution()
