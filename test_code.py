@@ -29,4 +29,7 @@
 # dict[str(a)] = 1
 # print(dict.get())
 
-print(sorted("jgrjfuy"))
+# print(sorted("jgrjfuy"))
+
+s = ""
+print(s[4:4])

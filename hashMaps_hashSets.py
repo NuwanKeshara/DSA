@@ -136,10 +136,32 @@ class Solution:
                     return res
         
 
+    def encode(self, strs: list[str]) -> str:
+        s = ""
+
+        for i in strs:
+            s += str(len(i)) + "#" + i
+        return s
+
+
+    def decode(self, s: str) -> list[str]:
+        res, i = [], 0
+
+        while i < len(s):
+            j = i
+            while s[j] != "#":
+                j += 1
+            length = int(s[i:j])
+            res.append(s[j+1:j+1+length])
+            i = j + 1 + length
+        return res
 
 
 
 if __name__ == "__main__":
     cls = Solution()
+    encode_val = cls.encode([""])
+    print(encode_val)
 
-    print(cls.groupAnagrams1(["act","pots","tops","cat","stop","hat"]))
+    decode_val = cls.decode(encode_val)
+    print(decode_val)
