@@ -63,7 +63,19 @@ class Solution:
         return [-1, -1]
         
     
-    def twoSums2(self, numbers: list[int], target: int) -> list[int]:
+    def twoSum2(self, numbers: list[int], target: int) -> list[int]:
+        left , right = 0, len(numbers)-1
+
+        while left < right:
+            two_sum = numbers[left] + numbers[right]
+            
+            if two_sum > target:
+                right -= 1
+            elif two_sum < target:
+                left += 1
+            else:
+                return [left+1, right+1]
+        
         return [-1,-1]
     
     
@@ -71,4 +83,4 @@ class Solution:
 if __name__ == "__main__":
 
     cls = Solution()
-    print(cls.twoSum([1,2,3,4],3))
+    print(cls.twoSum2([1,2,3,4],3))
