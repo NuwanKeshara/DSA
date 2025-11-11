@@ -31,5 +31,5 @@
 
 # print(sorted("jgrjfuy"))
 
-s = ""
-print(s[4:4])
+# s = ""
+# print(s[4:4])
