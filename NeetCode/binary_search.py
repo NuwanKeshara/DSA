@@ -13,7 +13,22 @@ class Solution:
                 last = mid - 1
         return -1
     
+    # memory overflow fixed
+    def search(self, nums:list[int], target:int) -> int:
+        first, last = 0, len(nums)-1
 
+        while first <= last:
+            mid = (first + (last - first)) // 2
+
+            if nums[mid] < target:
+                first = mid + 1
+            elif nums[mid] > target:
+                last = mid - 1
+            else:
+                return mid
+            
+        return -1
+    
 
 
 
