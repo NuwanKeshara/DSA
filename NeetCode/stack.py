@@ -86,6 +86,9 @@ class Solution2:
                 stack.append(int(token))
 
         return stack.pop()
+    
+
+    
 
 
 
@@ -106,4 +109,3 @@ if __name__ == "__main__":
 
     # print(int(1/2))
     sol2 = Solution2()
-    print(sol2.evalRPN(["4","13","5","/","+"]))
