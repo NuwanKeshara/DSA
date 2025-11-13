@@ -61,17 +61,49 @@ class MinStack2:
 
 
 
+class Solution2:
+    def evalRPN(self, tokens:list[str]) -> int:
+        fop, sop = None, None
+        stack = []
+        hashset = {"+", "-", "*", "/"}
+
+        for token in tokens:
+            if token in hashset:
+                sop = stack.pop()
+                fop = stack.pop()
+
+                match token:
+                    case "+":
+                        stack.append(fop + sop)
+                    case "-":
+                        stack.append(fop - sop)
+                    case "*":
+                        stack.append(fop * sop)
+                    case "/":
+                        stack.append(int(fop / sop))
+
+            else:
+                stack.append(int(token))
+
+        return stack.pop()
+
+
+
 if __name__ == "__main__":
     sol = Solution()
     
     val = sol.isValid("[]")
     # print(val)
 
-    ms = MinStack2()
-    print(ms.push(-1))
-    print(ms.push(3))
-    print(ms.push(-4))
-    print(ms.getMin())
-    print(ms.pop())
-    print(ms.getMin())
-    print(ms.top())
+    # ms = MinStack2()
+    # print(ms.push(-1))
+    # print(ms.push(3))
+    # print(ms.push(-4))
+    # print(ms.getMin())
+    # print(ms.pop())
+    # print(ms.getMin())
+    # print(ms.top())
+
+    # print(int(1/2))
+    sol2 = Solution2()
+    print(sol2.evalRPN(["4","13","5","/","+"]))
