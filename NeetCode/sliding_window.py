@@ -14,4 +14,44 @@ class Solution:
     
 
 
-    def
+    def lengthOfLongestSubstring(self, s:str) -> int:
+        left, right = 0, 0
+        freq_map = {}
+        substring, max_substring = 0, 0
+
+        while right < len(s):
+
+            while right < len(s) and freq_map.get(s[right],0) == 0:
+                freq_map[s[right]] = 1
+                right += 1
+                substring += 1
+            
+            max_substring = max(max_substring, substring)
+
+            while right < len(s) and freq_map.get(s[right]) != 0:
+                freq_map[s[left]] -= 1
+                substring -= 1
+                left += 1
+
+        return max_substring
+    
+
+
+    
+                
+
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    s = Solution()
+
+    print(s.lengthOfLongestSubstring("abcabcbb"))
