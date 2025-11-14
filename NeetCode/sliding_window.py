@@ -52,7 +52,36 @@ class Solution:
         return res
     
 
+    def characterReplacement(self, s:str, k:int) -> int:
+        left, right = 0, 0
+        hashSet = set()
+        substring = 0
 
+        for right in range(len(s)):
+            hashSet.add(s[right])
+
+            while len(hashSet) > k + 1 :
+                hashSet.remove(s[left])
+                left += 1
+            
+            substring = max(substring, right - left + 1)
+        return substring
+
+
+    def characterReplacement2(self, s:str, k:int) -> int:
+        left = 0
+        hashMap = {}
+        res = 0
+
+        for right in range(len(s)):
+            hashMap[s[right]] = 1 + hashMap.get(s[right],0)
+
+            while ((right - left + 1) - max(hashMap.values())) > k:
+                hashMap[s[left]] -= 1
+                left += 1
+            
+            res = max(res, (right - left + 1))
+        return res
 
                 
 
@@ -70,4 +99,5 @@ class Solution:
 if __name__ == "__main__":
     s = Solution()
 
-    print(s.lengthOfLongestSubstring2("abcabcbb"))
+    # print(s.lengthOfLongestSubstring2("abcabcbb"))
+    print(s.characterReplacement2("AAABABB",1))
