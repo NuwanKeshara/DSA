@@ -107,6 +107,22 @@ class Solution:
         return res
 
 
+    # Monotonic first True value
+    def monotonicSearch(self, nums:list[bool]) -> int:
+        # nums = [False, False, False, True, True]
+        left, right = 0, len(nums) - 1
+        first_true = -1
+
+        while left <= right:
+            mid = (left + right) // 2
+
+            if nums[mid]:
+                right = mid - 1
+                first_true = mid
+            else:
+                left = mid + 1
+        return first_true
+
 
 if __name__ == "__main__":
     sol = Solution()
@@ -114,4 +130,5 @@ if __name__ == "__main__":
 
     # print(sol.evalRPN(["4","13","5","/","+"]))
     # print(sol.search([-1,0,2,4,6,8], 3))
+    print(sol.monotonicSearch([False, False, False, True, True]))
 
