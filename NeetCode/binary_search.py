@@ -81,7 +81,29 @@ class Solution:
                 return True
         
         return False
+    
 
+
+    def minEatingSpeed(self, piles:list[int], h:int) -> int:
+
+        max_h = sum(piles)
+        min_h = len(piles)
+        
+
+        if min_h <= h <= max_h :
+            k = list(range(1,max(piles)))
+            h_dash = [sum(list(map(lambda x: x // i, piles))) + min_h for i in k]
+
+            
+            left, right = 0, len(k) - 1
+
+            while left <= right:
+                mid = (left + right) // 2
+
+                if 
+        
+        else:
+            return -1
 
 
 if __name__ == "__main__":
@@ -91,4 +113,3 @@ if __name__ == "__main__":
     # print(sol.evalRPN(["4","13","5","/","+"]))
     # print(sol.search([-1,0,2,4,6,8], 3))
 
-    print(sol.searchMatrix2([[1,2,4,8],[10,11,12,13],[14,20,30,40]], 0))
