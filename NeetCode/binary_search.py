@@ -1,3 +1,6 @@
+import math
+
+
 class Solution:
     def search(self, nums:list[int], target:int) -> int:
         first, last = 0, len(nums)-1
@@ -86,24 +89,23 @@ class Solution:
 
     def minEatingSpeed(self, piles:list[int], h:int) -> int:
 
-        max_h = sum(piles)
-        min_h = len(piles)
-        
+        left, right = 1, max(piles)
+        res = right
 
-        if min_h <= h <= max_h :
-            k = list(range(1,max(piles)))
-            h_dash = [sum(list(map(lambda x: x // i, piles))) + min_h for i in k]
+        while left <= right:
+            mid = (left + right) // 2
 
-            
-            left, right = 0, len(k) - 1
+            hours = 0
+            for i in piles:
+                hours += math.ceil(i / mid)
 
-            while left <= right:
-                mid = (left + right) // 2
+            if hours <= h:
+                res = min(mid,res)
+                right = mid - 1
+            else:
+                left = mid + 1
+        return res
 
-                if 
-        
-        else:
-            return -1
 
 
 if __name__ == "__main__":
