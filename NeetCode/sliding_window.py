@@ -11,3 +11,7 @@ class Solution:
             profit = max(profit, i - min)
         
         return profit
+    
+
+
+    def
