@@ -51,7 +51,36 @@ class Solution:
         return False
 
 
-    
+    def searchMatrix2(self, matrix:list[list[int]], target: int) -> bool:
+        rows, cols = len(matrix), len(matrix[0])
+        left, right = 0, rows - 1
+        row = 0
+        while left <= right:
+            row = (left + right) // 2
+
+            if matrix[row][-1] < target:
+                left = row + 1
+            elif matrix[row][0] > target:
+                right = row - 1
+            else:
+                break
+
+        if not(left <= right):
+            return False
+        
+        left, right = 0, cols - 1
+
+        while left <= right:
+            col = (left + right) // 2
+
+            if matrix[row][col] < target:
+                left = col + 1
+            elif matrix[row][col] > target:
+                right = col - 1
+            else:
+                return True
+        
+        return False
 
 
 
@@ -62,4 +91,4 @@ if __name__ == "__main__":
     # print(sol.evalRPN(["4","13","5","/","+"]))
     # print(sol.search([-1,0,2,4,6,8], 3))
 
-    print(sol.searchMatrix([[1,2,4,8],[10,11,12,13],[14,20,30,40]], 41))
+    print(sol.searchMatrix2([[1,2,4,8],[10,11,12,13],[14,20,30,40]], 0))
