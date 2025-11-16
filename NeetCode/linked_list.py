@@ -8,6 +8,9 @@ class ListNode:
 
 
 class Solution:
+    # def __init__(self):
+    #     self.head = None
+
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         left, right = None, head
 
@@ -98,7 +101,41 @@ class Solution:
             head = head.next
         return False
 
+    def reorderList(self, head: Optional[ListNode]) -> ListNode:
+        hashMap = {}
+        index = 0
 
+        while head:
+            hashMap[index] = head
+            head = head.next
+            index += 1
+        # print(hashMap)
+
+        dummy = ListNode()
+        head = dummy
+        while hashMap:
+            minNode = hashMap[min(hashMap)]
+            dummy.next = minNode
+            dummy = dummy.next
+            hashMap.pop(min(hashMap))
+
+            if hashMap:
+                maxNode = hashMap[max(hashMap)]
+                dummy.next = maxNode
+                dummy = dummy.next
+                hashMap.pop(max(hashMap))
+            
+        dummy.next = None
+        self.head = head.next
+
+    
+    # def __str__(self):
+    #     vals = []
+    #     curr = self.head
+    #     while curr is not None:
+    #         vals.append(curr.val)
+    #         curr = curr.next
+    #     return str(vals)
 
 
 class Node:
@@ -141,7 +178,7 @@ if __name__ == "__main__":
     # ln1 = ListNode(1,ln2)
     # ln0 = ListNode(0,ln1)
 
-    # s = Solution()
+    s = Solution()
     # x = s.reverseList(ln0)
     # while x:
     #     print(x.val)
@@ -149,7 +186,14 @@ if __name__ == "__main__":
 
     ll = LinkedList()
     ll.add(1)
-    # ll.add(2)
-    # ll.add(3)
+    ll.add(2)
+    head = ll.add(3)
 
     print(ll)
+
+    s.reorderList(head)
+    print(s)
+
+    # s = {0:10, 1:20}
+    # s.pop(0)
+    # print(s)
