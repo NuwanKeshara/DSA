@@ -47,7 +47,7 @@ class Solution:
             
             if curr1:
                 tail.next = curr1
-            elif curr1:
+            elif curr2:
                 tail.next = curr2
             
             return head
