@@ -75,6 +75,30 @@ class Solution:
         return dummy.next
 
 
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        slow, fast = head, head
+
+        while fast.next and fast.next.next:
+            fast = fast.next.next
+            slow = slow.next
+            if slow == fast:
+                return True
+            
+        return False
+
+
+    def hasCycle2(slef, head: Optional[ListNode]) -> bool:
+        hashSet = set()
+
+        while head:
+            if head in hashSet:
+                return True
+            else:
+                hashSet.add(head)
+            head = head.next
+        return False
+
+
 
 
 class Node:
