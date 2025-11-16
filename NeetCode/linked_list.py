@@ -87,16 +87,16 @@ class Solution:
         return False
 
 
-    def hasCycle2(slef, head: Optional[ListNode]) -> bool:
-        hashSet = set()
+    # def hasCycle2(slef, head: Optional[ListNode]) -> bool:
+    #     hashSet = set()
 
-        while head:
-            if head in hashSet:
-                return True
-            else:
-                hashSet.add(head)
-            head = head.next
-        return False
+    #     while head:
+    #         if head in hashSet:
+    #             return True
+    #         else:
+    #             hashSet.add(head)
+    #         head = head.next
+    #     return False
 
 
 
