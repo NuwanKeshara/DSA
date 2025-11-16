@@ -128,6 +128,35 @@ class Solution:
         dummy.next = None
         self.head = head.next
 
+
+    def reorderList2(self, head: Optional[ListNode]) -> None:
+        slow, fast = head, head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        temp = slow
+        slow = slow.next
+        prev = temp.next = None
+
+        # first - head, second - slow
+
+        while slow:
+            temp = slow.next
+            slow.next = prev
+            prev = slow
+            slow = temp
+        
+        first, second = head, prev
+        while second:
+            t1, t2 = first.next, second.next
+            first.next = second
+            second.next = t1
+            first, second = t1, t2
+
+
+
     
     # def __str__(self):
     #     vals = []
