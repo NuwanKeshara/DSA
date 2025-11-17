@@ -6,6 +6,12 @@ class ListNode:
         self.val = val
         self.next = next
 
+class Node:
+    def __init__(self, val: int = 0, next: 'Node' = None, random: 'Node' = None):
+        self.val = val
+        self.next = next
+        self.random = random
+
 
 class Solution:
     # def __init__(self):
@@ -215,6 +221,33 @@ class Solution:
 
         prev.next = prev.next.next
         return dummy.next
+
+
+    def copyRandomList(self, head: Optional[Node]) -> Optional[Node]:
+        hashMap = {head:None}
+        node = head
+
+        while node:
+            new = Node(node.val)
+            hashMap[node] = new
+            node = node.next
+
+        node = head
+
+        while node:
+            if node.next:
+                hashMap[node].next = hashMap[node.next]
+            if node.random:
+                hashMap[node].random = hashMap[node.random]
+            
+            node = node.next
+        return hashMap[head]
+
+
+
+
+
+
 
 
 
