@@ -175,6 +175,29 @@ class Solution:
             next = hashMap[i]
             
         return next
+    
+
+
+    def removeNthFromEnd2(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        curr = head
+        index = 0
+        while curr:
+            curr = curr.next
+            index += 1
+
+        nth_index = index - n
+        prev = ListNode(next=head)
+        new = prev 
+        next = head
+
+        for i in range(nth_index + 1):
+            if i == nth_index:
+                prev.next = next.next
+
+            prev = next
+            next = next.next
+        return new.next
+
 
 
     
