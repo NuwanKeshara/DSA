@@ -197,6 +197,24 @@ class Solution:
             prev = next
             next = next.next
         return new.next
+    
+
+
+    def removeNthFromEnd3(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        dummy = ListNode(0, head)
+        prev = dummy
+        right = head
+
+        while n > 0:
+            right = right.next
+            n -= 1
+
+        while right:
+            prev = prev.next
+            right = right.next
+
+        prev.next = prev.next.next
+        return dummy.next
 
 
 
