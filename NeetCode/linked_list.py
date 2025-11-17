@@ -342,6 +342,45 @@ class LRUCache:
         self.insert(new_node)
 
 
+class LRUCache2:
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.cache = {}
+        self.lru, self.mru = Nodex(), Nodex()
+        self.lru.next, self.mru.prev = self.mru, self. lru
+
+    # insert the node into far right corner
+    def insert(self, node: Nodex) -> None:
+        temp_node = self.mru.prev
+        node.next, node.prev = self.mru, temp_node
+        temp_node.next = self.mru.prev = node
+
+    # remove the node from anywhere
+    def remove(self, node: Nodex) -> None:
+        prev_node, next_node = node.prev, node.next
+        prev_node.next, next_node.prev = next_node, prev_node
+        node.prev = node.next = None
+
+    # get the value if exists
+    def get(self, key: int) -> int:
+        if key in self.cache:
+            self.remove(self.cache[key])
+            self.insert(self.cache[key])
+            return self.cache[key].val
+        return -1
+    
+    # insert or replace the value
+    def put(self, key: int, value: int) -> None:
+        node = Nodex(key=key, val=value)
+        if key in self.cache:
+            self.remove(self.cache[key])
+        elif self.capacity == len(self.cache):
+            lru_key = self.lru.next.key
+            self.remove(self.cache[lru_key])
+            del self.cache[lru_key]
+        self.cache[key] = node
+        self.insert(node)
+
 
 
 if __name__ == "__main__":
@@ -370,7 +409,7 @@ if __name__ == "__main__":
     # s.pop(0)
     # print(s)
 
-    lc = LRUCache(10)
+    lc = LRUCache2(10)
     print(lc.put(10, 13))
     print(lc.put(3, 17))
     print(lc.put(6, 11))
