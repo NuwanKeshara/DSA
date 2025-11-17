@@ -245,22 +245,6 @@ class Solution:
 
 
 
-
-
-
-
-
-
-    
-    # def __str__(self):
-    #     vals = []
-    #     curr = self.head
-    #     while curr is not None:
-    #         vals.append(curr.val)
-    #         curr = curr.next
-    #     return str(vals)
-
-
 class Node:
     def __init__(self, val, next=None):
         self.val = val
@@ -292,6 +276,71 @@ class LinkedList:
             vals.append(curr.val)
             curr = curr.next
         return str(vals)
+    
+
+
+
+
+class Nodex:
+    def __init__(self, val=0, key=0, next=None, prev=None):
+        self.val = val
+        self.key = key
+        self. next = next
+        self.prev = prev
+
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.cache = {}
+        self.capacity = capacity
+        self.mru = self.lru = None
+
+    # remove node from anywhere in the doubly linkedlist
+    def remove(self, node: Node) -> None:
+        prev_node, next_node = node.prev, node.next
+        node.next = node.prev = None
+
+        if prev_node and next_node:
+            prev_node.next, next_node.prev = next_node, prev_node
+        elif prev_node is None and next_node:
+            self.lru, next_node.prev = next_node, None
+        elif prev_node and next_node is None:
+            self.mru, prev_node.next = prev_node, None
+        else:
+            self.lru = self.mru = None
+            
+    # insert far right into the doubly linkedList
+    def insert(self, node: Node) -> None:
+        if self.mru and self.lru:
+            node.prev = self.mru
+            node.next = None
+            self.mru.next = node
+            self.mru = node
+        else:
+            self.lru = self.mru = node
+            node.next = node.prev = None
+    
+
+    def get(self, key: int) -> int:
+        if key in self.cache:
+            self.remove(self.cache[key])
+            self.insert(self.cache[key])
+            return self.cache[key].val
+        return -1
+
+    # add a new node to far right in the doubly linkedlist
+    def put(self, key: int, value: int) -> None:
+        new_node = Nodex(val=value, key=key)
+
+        if key in self.cache:
+            self.remove(self.cache[key])
+        elif self.capacity == len(self.cache):
+            lru_key = self.lru.key
+            self.remove(self.cache[lru_key])
+            del self.cache[lru_key]
+        self.cache[key] = new_node
+        self.insert(new_node)
+
 
 
 
@@ -307,16 +356,299 @@ if __name__ == "__main__":
     #     print(x.val)
     #     x = x.next
 
-    ll = LinkedList()
-    ll.add(1)
-    ll.add(2)
-    head = ll.add(3)
+    # ll = LinkedList()
+    # ll.add(1)
+    # ll.add(2)
+    # head = ll.add(3)
 
-    print(ll)
+    # print(ll)
 
-    s.reorderList(head)
-    print(s)
+    # s.reorderList(head)
+    # print(s)
 
     # s = {0:10, 1:20}
     # s.pop(0)
     # print(s)
+
+    lc = LRUCache(10)
+    print(lc.put(10, 13))
+    print(lc.put(3, 17))
+    print(lc.put(6, 11))
+    print(lc.put(10, 5))
+    print(lc.put(9, 10))
+    print(lc.get(13))
+    print(lc.put(2, 19))
+    print(lc.get(2))
+    print(lc.get(3))
+    print(lc.put(5, 25))
+    print(lc.get(8))
+    print(lc.put(9, 22))
+    print(lc.put(5, 5))
+    print(lc.put(1, 30))
+    print(lc.get(11))
+    print(lc.put(9, 12))
+    print(lc.get(7))
+    print(lc.get(5))
+    print(lc.get(8))
+    print(lc.get(9))
+    print(lc.put(4, 30))
+    print(lc.put(9, 3))
+    print(lc.get(9))
+    print(lc.get(10))
+    print(lc.get(10))
+    print(lc.put(6, 14))
+    print(lc.put(3, 1))
+    print(lc.get(3))
+    print(lc.put(10, 11))
+    print(lc.get(8))
+    print(lc.put(2, 14))
+    print(lc.get(1))
+    print(lc.get(5))
+    print(lc.get(4))
+    print(lc.put(11, 4))
+    print(lc.put(12, 24))
+    print(lc.put(5, 18))
+    print(lc.get(13))
+    print(lc.put(7, 23))
+    print(lc.put(8, 27))
+    print(lc.put(12, 12))
+    print(lc.get(3))
+    print(lc.put(3, 21))
+    print(lc.put(10, 10))
+    print(lc.get(8))
+    print(lc.get(11))
+    print(lc.get(7))
+    print(lc.put(7, 10))
+    print(lc.put(9, 2))
+    print(lc.put(5, 8))
+    print(lc.get(11))
+    print(lc.put(8, 2))
+    print(lc.put(11, 1))
+    print(lc.put(5, 5))
+    print(lc.get(5))
+    print(lc.put(4, 9))
+    print(lc.get(4))
+    print(lc.get(10))
+    print(lc.put(6, 18))
+    print(lc.put(4, 7))
+    print(lc.put(8, 12))
+    print(lc.get(7))
+    print(lc.get(5))
+    print(lc.get(4))
+    print(lc.get(5))
+    print(lc.put(7, 23))
+    print(lc.get(3))
+    print(lc.put(7, 3))
+    print(lc.put(4, 4))
+    print(lc.put(10, 6))
+    print(lc.get(6))
+    print(lc.put(3, 9))
+    print(lc.get(3))
+    print(lc.get(4))
+    print(lc.put(11, 11))
+    print(lc.put(1, 12))
+    print(lc.get(3))
+    print(lc.put(1, 2))
+    print(lc.put(5, 6))
+    print(lc.get(5))
+    print(lc.put(1, 11))
+    print(lc.put(8, 12))
+    print(lc.get(2))
+    print(lc.get(5))
+    print(lc.get(9))
+    print(lc.put(10, 1))
+    print(lc.put(1, 3))
+    print(lc.get(10))
+    print(lc.put(10, 2))
+    print(lc.put(1, 11))
+    print(lc.put(5, 5))
+    print(lc.put(7, 5))
+    print(lc.put(10, 10))
+    print(lc.get(9))
+    print(lc.get(4))
+    print(lc.get(4))
+    print(lc.get(6))
+    print(lc.get(11))
+    print(lc.put(7, 13))
+    print(lc.put(2, 7))
+    print(lc.put(10, 13))
+    print(lc.put(8, 5))
+    print(lc.put(9, 10))
+    print(lc.get(6))
+    print(lc.get(10))
+    print(lc.put(3, 5))
+    print(lc.put(10, 12))
+    print(lc.put(5, 12))
+    print(lc.get(8))
+    print(lc.get(3))
+    print(lc.put(3, 1))
+    print(lc.put(4, 6))
+    print(lc.put(10, 4))
+    print(lc.put(8, 10))
+    print(lc.put(4, 9))
+    print(lc.put(2, 13))
+    print(lc.put(10, 8))
+    print(lc.put(1, 8))
+    print(lc.put(1, 2))
+    print(lc.put(4, 6))
+    print(lc.put(4, 2))
+    print(lc.put(10, 10))
+    print(lc.put(9, 12))
+    print(lc.get(4))
+    print(lc.get(10))
+    print(lc.get(10))
+    print(lc.get(9))
+    print(lc.put(8, 7))
+    print(lc.get(5))
+    print(lc.put(3, 8))
+    print(lc.get(10))
+    print(lc.put(5, 11))
+    print(lc.put(5, 2))
+    print(lc.get(8))
+    print(lc.put(1, 3))
+    print(lc.put(7, 8))
+    print(lc.get(1))
+    print(lc.put(6, 5))
+    print(lc.get(9))
+    print(lc.put(7, 12))
+    print(lc.get(5))
+    print(lc.get(8))
+    print(lc.put(10, 4))
+    print(lc.put(1, 9))
+    print(lc.put(2, 4))
+    print(lc.put(2, 5))
+    print(lc.put(10, 10))
+    print(lc.get(5))
+    print(lc.get(9))
+    print(lc.get(10))
+    print(lc.put(8, 3))
+    print(lc.put(1, 7))
+    print(lc.put(10, 7))
+    print(lc.put(4, 8))
+    print(lc.put(2, 11))
+    print(lc.put(8, 2))
+    print(lc.get(1))
+    print(lc.get(9))
+    print(lc.get(2))
+    print(lc.put(2, 5))
+    print(lc.put(3, 8))
+    print(lc.put(1, 8))
+    print(lc.put(2, 7))
+    print(lc.get(10))
+    print(lc.get(3))
+    print(lc.put(1, 4))
+    print(lc.put(10, 5))
+    print(lc.get(8))
+    print(lc.get(2))
+    print(lc.get(2))
+    print(lc.get(1))
+    print(lc.put(9, 2))
+    print(lc.get(5))
+    print(lc.get(7))
+    print(lc.put(10, 3))
+    print(lc.put(5, 5))
+    print(lc.put(1, 10))
+    print(lc.put(2, 10))
+    print(lc.get(4))
+    print(lc.get(3))
+    print(lc.get(1))
+    print(lc.get(1))
+    print(lc.put(3, 7))
+    print(lc.get(9))
+    print(lc.put(10, 2))
+    print(lc.get(3))
+    print(lc.get(4))
+    print(lc.put(6, 4))
+    print(lc.get(6))
+    print(lc.put(7, 11))
+    print(lc.get(8))
+    print(lc.get(6))
+    print(lc.put(2, 2))
+    print(lc.get(2))
+    print(lc.put(7, 9))
+    print(lc.put(8, 6))
+    print(lc.put(2, 4))
+    print(lc.get(8))
+    print(lc.get(1))
+    print(lc.put(7, 5))
+    print(lc.put(4, 1))
+    print(lc.get(10))
+    print(lc.put(6, 3))
+    print(lc.get(6))
+    print(lc.put(4, 6))
+    print(lc.put(1, 8))
+    print(lc.put(6, 7))
+    print(lc.put(3, 4))
+    print(lc.put(4, 3))
+    print(lc.get(10))
+    print(lc.get(3))
+    print(lc.get(7))
+    print(lc.put(4, 3))
+    print(lc.get(8))
+    print(lc.put(3, 7))
+    print(lc.get(4))
+    print(lc.get(10))
+    print(lc.put(6, 4))
+    print(lc.put(5, 10))
+    print(lc.put(2, 4))
+    print(lc.put(5, 6))
+    print(lc.put(10, 9))
+    print(lc.put(5, 8))
+    print(lc.put(1, 3))
+    print(lc.put(7, 5))
+    print(lc.put(8, 10))
+    print(lc.get(3))
+    print(lc.put(6, 4))
+    print(lc.get(5))
+    print(lc.put(8, 2))
+    print(lc.put(8, 7))
+    print(lc.put(6, 4))
+    print(lc.get(10))
+    print(lc.put(9, 3))
+    print(lc.put(4, 7))
+    print(lc.get(6))
+    print(lc.put(5, 10))
+    print(lc.get(10))
+    print(lc.get(10))
+    print(lc.put(8, 5))
+    print(lc.get(4))
+    print(lc.put(5, 9))
+    print(lc.put(9, 9))
+    print(lc.put(5, 2))
+    print(lc.put(6, 4))
+    print(lc.put(3, 8))
+    print(lc.put(8, 8))
+    print(lc.put(10, 2))
+    print(lc.put(2, 7))
+    print(lc.put(1, 7))
+    print(lc.put(10, 9))
+    print(lc.get(4))
+    print(lc.get(1))
+    print(lc.get(7))
+    print(lc.put(8, 10))
+    print(lc.get(6))
+    print(lc.put(4, 5))
+    print(lc.get(7))
+    print(lc.put(3, 9))
+    print(lc.get(4))
+    print(lc.get(1))
+    print(lc.put(6, 9))
+    print(lc.put(10, 10))
+    print(lc.put(9, 1))
+    print(lc.put(4, 6))
+    print(lc.put(1, 10))
+    print(lc.get(8))
+    print(lc.put(7, 10))
+    print(lc.get(9))
+    print(lc.put(5, 5))
+    print(lc.put(1, 3))
+    print(lc.get(8))
+    print(lc.put(2, 7))
+    print(lc.get(9))
+    print(lc.put(6, 4))
+    print(lc.get(7))
+    print(lc.put(2, 9))
+    print(lc.get(10))
+    print(lc.get(6))
+
+
