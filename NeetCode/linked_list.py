@@ -156,6 +156,26 @@ class Solution:
             first, second = t1, t2
 
 
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        hashMap = {}
+        curr = head
+        index = 0
+
+        while curr:
+            hashMap[index] = curr
+            curr = curr.next
+            index += 1
+        
+        next = None 
+        nth_index = index - n    
+        for i in range(index-1, -1, -1):
+            if i == nth_index:
+                continue
+            hashMap[i].next = next
+            next = hashMap[i]
+            
+        return next
+
 
     
     # def __str__(self):
