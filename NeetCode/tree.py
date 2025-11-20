@@ -29,3 +29,7 @@ class BinaryTree:
                         break
         else:
             self.head = node
+
+    
+    def __str__(self):
+        print("Binary Serch Tree")
