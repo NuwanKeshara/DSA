@@ -31,5 +31,18 @@ class BinaryTree:
             self.head = node
 
     
+    def inOrder(self):
+        ...
+    
+    def preOrder(self):
+        ...
+
+    def postOrder(self):
+        ...
+
+    def BFS(self):
+        ...
+
+
     def __str__(self):
         print("Binary Serch Tree")
