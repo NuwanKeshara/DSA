@@ -45,4 +45,4 @@ class BinaryTree:
 
 
     def __str__(self):
-        print("Binary Serch Tree")
+        print("Depth First Search")
