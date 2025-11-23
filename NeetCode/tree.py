@@ -45,4 +45,7 @@ class BinaryTree:
 
 
     def __str__(self):
-        print("Depth First Search")
+        print("InOrder Traversl:")
+        print("PreOrder Traversl:")
+        print("PostOrder Traversl:")
+        print("BFS Traversl:")
