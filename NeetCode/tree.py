@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class TreeNode:
     def __init__(self, val: int =0, left = None, right = None):
         self.val = val
@@ -31,9 +34,35 @@ class BinaryTree:
             self.head = node
 
     
-    def inOrder(self):
-        ...
+    def inOrder(self, root: Optional[TreeNode]) -> list[int]:
+        res = []
+
+        def inorder(root):
+            if not root:
+                return 
+            inorder(root.left)
+            res.append(root.val)
+            inorder(root.right)
+        
+        inorder(root)
+        return res
     
+    def inOrder_iterative(self, root: Optional[TreeNode]) -> list[int]:
+        res = []
+        stack = []
+        curr = root
+
+        while curr or stack:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+
+            curr = stack.pop()
+            res.append(curr.val)
+            curr = curr.right
+        return res
+    
+
     def preOrder(self):
         ...
 
@@ -45,7 +74,22 @@ class BinaryTree:
 
 
     def __str__(self):
-        print("InOrder Traversl:")
+        print("InOrder Traversl:", str(self.inOrder(self.head)))
         print("PreOrder Traversl:")
         print("PostOrder Traversl:")
         print("BFS Traversl:")
+        return ""
+
+
+    
+
+if __name__ == "__main__":
+    bt = BinaryTree()
+    bt.add(5)
+    bt.add(3)
+    bt.add(7)
+    bt.add(1)
+    bt.add(4)
+    bt.add(6)
+
+    print(bt)
