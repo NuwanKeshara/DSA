@@ -99,7 +99,7 @@ class BinaryTree:
                 return
             postorder(root.left)
             postorder(root.right)
-            res.append(root)
+            res.append(root.val)
 
         postorder(root)
         return res
@@ -112,7 +112,7 @@ class BinaryTree:
     def __str__(self):
         print("InOrder Traversl:", str(self.inOrder(self.head)))
         print("PreOrder Traversl:", str(self.preOrder(self.head)))
-        print("PostOrder Traversl:")
+        print("PostOrder Traversl:", str(self.postOrder(self.head)))
         print("BFS Traversl:")
         return ""
 
