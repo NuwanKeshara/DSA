@@ -33,7 +33,8 @@ class BinaryTree:
         else:
             self.head = node
 
-    
+
+    # inorder traversal
     def inOrder(self, root: Optional[TreeNode]) -> list[int]:
         res = []
 
@@ -63,6 +64,7 @@ class BinaryTree:
         return res
     
 
+    # preorder traversal
     def preOrder(self, root: Optional[TreeNode]) -> list[int]:
         res = []
 
@@ -107,6 +109,7 @@ class BinaryTree:
         return res
 
 
+    # postorder traversal
     def postOrder(self, root: Optional[TreeNode]) -> list[int]:
         res = []
 
