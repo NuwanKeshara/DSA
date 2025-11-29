@@ -1,3 +1,4 @@
+import collections
 from typing import Optional
 
 
@@ -140,8 +141,25 @@ class BinaryTree:
         return res
 
 
-    def BFS(self):
-        ...
+    # breadth first search traversal
+    def BFS(self, root: Optional[TreeNode]) -> list[int]:
+        res = []
+        queue = collections.deque()
+        queue.append(root)
+
+        while queue:
+            qlen = len(queue)
+            lvl = []
+            for _ in range(qlen):
+                curr = queue.popleft()
+                lvl.append(curr.val)
+                if curr.left:
+                    queue.append(curr.left)
+                if curr.right:
+                    queue.append(curr.right)
+            res.append(lvl)
+        return res
+
 
 
     def __str__(self):
@@ -150,7 +168,7 @@ class BinaryTree:
         print("PreOrder Traversl2:", str(self.preOrder_iterative2(self.head)))
         print("PostOrder Traversl:", str(self.postOrder(self.head)))
         print("PostOrder Traversl2:", str(self.postorder_iterative(self.head)))
-        print("BFS Traversl:")
+        print("BFS Traversl:", str(self.BFS(self.head)))
         return ""
 
 
