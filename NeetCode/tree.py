@@ -172,7 +172,6 @@ class BinaryTree:
     
 
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-
         curr = root
         def postorder(curr):
             if not curr:
@@ -184,15 +183,63 @@ class BinaryTree:
         postorder(curr)
         return root
 
-    def invertTree2(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
 
+    def invertTree2(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root:
             return
-        
         root.right, root.left = root.left, root.right
         self.invertTree2(root.left)
-        self.invertTree(root.right)
+        self.invertTree2(root.right)
         return root
+    
+
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        res = []
+        queue = collections.deque()
+        queue.append(root)
+
+        while queue:
+            qlen = len(queue)
+            lvl = []
+            for _ in range(qlen):
+                curr = queue.popleft()
+                lvl.append(curr.val)
+
+                if curr.left:
+                    queue.append(curr.left)
+                if curr.right:
+                    queue.append(curr.right)
+            res.append(lvl)
+        return len(res)
+
+
+    def maxDepth2(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        return 1 + max(self.maxDepth2(root.left), self.maxDepth2(root.right))
+    
+
+    def maxDepth3(self, root:Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        
+        q = collections.deque([root])
+        level = 0
+        while q:
+            for i in range(len(q)):
+                node = q.popleft()
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            level += 1
+        return level
+        
+
+
+
 
 
 if __name__ == "__main__":
