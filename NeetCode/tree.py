@@ -171,6 +171,30 @@ class BinaryTree:
         return ""
     
 
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+
+        curr = root
+        def postorder(curr):
+            if not curr:
+                return
+            postorder(curr.left)
+            postorder(curr.right)
+            curr.right, curr.left = curr.left, curr.right
+
+        postorder(curr)
+        return root
+
+    def invertTree2(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+
+        if not root:
+            return
+        
+        root.right, root.left = root.left, root.right
+        self.invertTree2(root.left)
+        self.invertTree(root.right)
+        return root
+
+
 if __name__ == "__main__":
     bt = BinaryTree()
     bt.add(5)
