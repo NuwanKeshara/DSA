@@ -89,6 +89,22 @@ class BinaryTree:
             curr = stack.pop()
             curr = curr.right
         return res
+    
+    def preOrder_iterative2(self, root: Optional[TreeNode]) -> list[int]:
+        res = []
+        stack = []
+        curr = root
+
+        while curr or stack:
+            if curr:
+                res.append(curr.val)
+                stack.append(curr.right)
+                curr = curr.left
+
+            else:
+                curr = stack.pop()
+
+        return res
 
 
     def postOrder(self, root: Optional[TreeNode]) -> list[int]:
@@ -112,6 +128,7 @@ class BinaryTree:
     def __str__(self):
         print("InOrder Traversl:", str(self.inOrder(self.head)))
         print("PreOrder Traversl:", str(self.preOrder(self.head)))
+        print("PreOrder Traversl2:", str(self.preOrder_iterative2(self.head)))
         print("PostOrder Traversl:", str(self.postOrder(self.head)))
         print("BFS Traversl:")
         return ""
