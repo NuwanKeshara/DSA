@@ -159,8 +159,7 @@ class BinaryTree:
                     queue.append(curr.right)
             res.append(lvl)
         return res
-
-
+    
 
     def __str__(self):
         print("InOrder Traversl:", str(self.inOrder(self.head)))
@@ -170,8 +169,6 @@ class BinaryTree:
         print("PostOrder Traversl2:", str(self.postorder_iterative(self.head)))
         print("BFS Traversl:", str(self.BFS(self.head)))
         return ""
-
-
     
 
 if __name__ == "__main__":
