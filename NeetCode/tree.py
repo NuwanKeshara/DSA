@@ -122,6 +122,9 @@ class BinaryTree:
 
         postorder(root)
         return res
+    
+    def postorder_iterative(self, root: Optional[TreeNode]) -> list[int]:
+        ...
 
 
     def BFS(self):
