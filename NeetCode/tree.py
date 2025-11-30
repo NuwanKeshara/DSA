@@ -238,7 +238,8 @@ class BinaryTree:
         return level
         
 
-
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        ...
 
 
 
