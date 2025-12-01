@@ -26,5 +26,5 @@ def sum(num):
         print("hello")
         return sum(num-1) 
     
-print(sum(5))
-print(total)
+# print(sum(5))
+# print(total)
