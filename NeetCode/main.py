@@ -28,3 +28,16 @@ def sum(num):
     
 # print(sum(5))
 # print(total)
+
+# 0, 1, 1, 2, 3, 5, 8, 13...
+# 1, 2, 3, 4, 5, 6, 7, 8, ...
+def fib(n):
+    if n <= 0:
+        return "input value should be greater than 0"
+    if n <= 2 and n > 0:
+        return n-1 
+    else:
+        return fib(n-1) + fib(n-2)
+    
+
+# print(fib(8))
