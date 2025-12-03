@@ -41,3 +41,16 @@ def fib(n):
     
 
 # print(fib(8))
+
+
+def fibo(num):
+    nums = [0] * num
+
+    for i in range(num):
+        if i > 1:
+            nums[i] = nums[i-1] + nums[i-2]
+        else:
+            nums[i] = i
+    return nums[-1]
+
+# print(fibo(8))
